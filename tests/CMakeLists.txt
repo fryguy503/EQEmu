@@ -6,7 +6,8 @@ set(tests_sources
 	main.cpp
 )
 
-set(tests_headers
+SET(tests_headers
+	achievements_test.h
 	atobool_test.h
 	data_verification_test.h
 	fixed_memory_test.h
