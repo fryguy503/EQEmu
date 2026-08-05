@@ -1,7 +1,7 @@
 # RoF2 achievement support
 
-This implementation is based on the RoF2 client code paths recovered in
-Ghidra. The newer ToB resource files are optional presentation data; explicit
+This implementation is based on the RoF2 client. The newer ToB resource
+files are optional presentation data; explicit
 progression selection can additionally author criteria only for narrow,
 independently validated level, level-locked progression, class skill-cap,
 item-ownership, travel, dependency, tradeskill, spent-AA, and zone-scoped
@@ -1070,8 +1070,7 @@ concept. That is an importer choice, not evidence about the RoF2 wire layout.
 ToB field 7 is retained as `world_display_flag` for provenance but is never
 serialized to RoF2. The narrowly documented structural mappings above do not
 infer rewards or packet layouts. No ToB packet layout or reward behavior is
-used by the runtime implementation; RoF2 Ghidra results remain the sole
-client-contract authority.
+used by the runtime implementation;
 
 ## Operational controls
 
