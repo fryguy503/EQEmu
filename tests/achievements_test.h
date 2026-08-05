@@ -38,6 +38,7 @@ public:
 		TEST_ADD(AchievementsTest::TypeThreeIsPresentationOnly);
 		TEST_ADD(AchievementsTest::MutationRequestValidation);
 		TEST_ADD(AchievementsTest::GuildMemberNotificationRule);
+		TEST_ADD(AchievementsTest::NearbyPlayerNotificationRules);
 	}
 
 private:
@@ -104,6 +105,34 @@ private:
 		TEST_ASSERT(!RuleB(Achievements, GuildMemberNotifications));
 		TEST_ASSERT(rules->SetRule("Achievements:GuildMemberNotifications", "true"));
 		TEST_ASSERT(RuleB(Achievements, GuildMemberNotifications));
+	}
+
+	void NearbyPlayerNotificationRules()
+	{
+		auto *rules = RuleManager::Instance();
+		std::string original_enabled;
+		std::string original_distance;
+		TEST_ASSERT(rules->GetRule("Achievements:NearbyPlayerNotifications", original_enabled));
+		TEST_ASSERT(rules->GetRule("Achievements:NearbyPlayerNotificationDistance", original_distance));
+
+		struct RuleRestorer {
+			RuleManager *rules;
+			std::string enabled;
+			std::string distance;
+
+			~RuleRestorer()
+			{
+				rules->SetRule("Achievements:NearbyPlayerNotifications", enabled);
+				rules->SetRule("Achievements:NearbyPlayerNotificationDistance", distance);
+			}
+		} rule_restorer{rules, original_enabled, original_distance};
+
+		TEST_ASSERT(rules->SetRule("Achievements:NearbyPlayerNotifications", "false"));
+		TEST_ASSERT(!RuleB(Achievements, NearbyPlayerNotifications));
+		TEST_ASSERT(rules->SetRule("Achievements:NearbyPlayerNotifications", "true"));
+		TEST_ASSERT(RuleB(Achievements, NearbyPlayerNotifications));
+		TEST_ASSERT(rules->SetRule("Achievements:NearbyPlayerNotificationDistance", "375"));
+		TEST_ASSERT(RuleI(Achievements, NearbyPlayerNotificationDistance) == 375);
 	}
 
 	struct Reader {

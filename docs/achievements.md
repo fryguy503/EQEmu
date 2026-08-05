@@ -1081,6 +1081,13 @@ client-contract authority.
 - `Achievements:GuildMemberNotifications` (default `true`) controls whether
   completion announcements are sent to other online guild members. Local
   completion sound, chat, and link delivery are unchanged.
+- `Achievements:NearbyPlayerNotifications` (default `true`) controls whether
+  the native completion announcement is also sent to nearby RoF2 players in
+  the same zone. This path is independent of guild announcements, so a nearby
+  guild member can receive both when both rules are enabled.
+- `Achievements:NearbyPlayerNotificationDistance` (default `200`) sets the
+  maximum three-dimensional distance for nearby completion announcements. A
+  value of `0` disables proximity delivery even when the Boolean rule is on.
 - `Achievements:CompletionNotificationIntervalMS` is the minimum delay between
   queued completion announcements. The default is 750 milliseconds; values
   below one millisecond are clamped to one.

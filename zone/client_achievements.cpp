@@ -2501,6 +2501,28 @@ void ClientAchievementState::SendCompletionNotification(
 		achievement_link_data
 	);
 	auto packet = new EQApplicationPacket(OP_AchievementEarned, std::move(data));
+	const auto nearby_distance = RuleI(Achievements, NearbyPlayerNotificationDistance);
+	if (RuleB(Achievements, NearbyPlayerNotifications) && nearby_distance > 0) {
+		const auto distance = static_cast<float>(nearby_distance);
+		for (const auto &entry : m_client.GetCloseMobList(distance)) {
+			auto mob = entry.second;
+			if (!mob || !mob->IsClient()) {
+				continue;
+			}
+
+			auto client = mob->CastToClient();
+			if (
+				client == &m_client ||
+				!client->Connected() ||
+				client->ClientVersion() != EQ::versions::ClientVersion::RoF2 ||
+				m_client.CalculateDistance(client) >= distance
+			) {
+				continue;
+			}
+
+			client->QueuePacket(packet);
+		}
+	}
 	m_client.FastQueuePacket(&packet);
 
 	if (
