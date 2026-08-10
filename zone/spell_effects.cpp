@@ -7588,9 +7588,9 @@ bool Mob::PassCastRestriction(int value)
 		return true;
 	}
 
-	const auto &achievement_restrictions =
-		AchievementManager::Instance().CastRestrictions(static_cast<uint32_t>(value));
-	if (!achievement_restrictions.empty()) {
+	const auto &achievement_requirements =
+		AchievementManager::Instance().CastRequirements(static_cast<uint32_t>(value));
+	if (!achievement_requirements.empty()) {
 		return IsClient() && CastToClient()->PassAchievementCastRestriction(value);
 	}
 

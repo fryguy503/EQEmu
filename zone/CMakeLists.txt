@@ -25,7 +25,7 @@ set(zone_sources
     cli/tests/cli_test_util.cpp
     cli/tests/cli_zone_state.cpp
     client.cpp
-	client_achievements.cpp
+    client_achievements.cpp
     client_bot.cpp
     client_evolving_items.cpp
     client_mods.cpp
@@ -83,7 +83,8 @@ set(zone_sources
     questmgr.cpp
     raids.cpp
     raycast_mesh.cpp
-	reward_selection.cpp
+    reward_selection.cpp
+    reward_selection_catalog.cpp
     shared_task_zone_messaging.cpp
     sidecar_api/loot_simulator_controller.cpp
     sidecar_api/sidecar_api.cpp
@@ -214,7 +215,8 @@ set(zone_headers
     questmgr.h
     raids.h
     raycast_mesh.h
-	reward_selection.h
+    reward_selection.h
+    reward_selection_catalog.h
     shared_task_zone_messaging.h
     sidecar_api/sidecar_api.h
     spawn2.h
